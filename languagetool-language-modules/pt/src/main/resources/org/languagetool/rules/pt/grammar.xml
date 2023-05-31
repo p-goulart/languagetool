@@ -30510,6 +30510,63 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
             </rule>
         </rulegroup>
 
+        <rulegroup id="CONFUSÃO_HA_HÁ" name="[Confusão] ha/há">
+            <short>Possível error de digitação.</short>
+
+            <rule>
+                <antipattern>
+                    <token>ha</token>
+                    <token spacebefore="no" regexp="yes">[!?]</token>
+                    <example>Ha! Te Peguei!</example>
+                </antipattern>
+                <antipattern>
+                    <token regexp="yes">\d+(.\d+)?(,\d+)?|mil|[bm]ilh(ão|ões)</token>
+                    <token>ha</token>
+                    <example>Um lote de 40 ha.</example>
+                    <example>Aproximadamente 40 mil ha.</example>
+                    <example>Soja: 40.300 ha.</example>
+                </antipattern>
+                <antipattern>
+                    <token>ha</token>
+                    <!-- TODO: add smarter apostrophe entity -->
+                    <token spacebefore="no" regexp="yes">&hifen;|'</token>
+                    <example>Eleazar ha-Kappar.</example>
+                </antipattern>
+                <antipattern>
+                    <token regexp="yes">h?ah?</token>
+                    <token min="0" spacebefore="no">,</token>
+                    <token>ha</token>
+                    <example>A ha, eu disse!</example>
+                    <example>Ah, ha, eu disse!</example>
+                </antipattern>
+                <antipattern>
+                    <token>ha</token>
+                    <token min="0" spacebefore="no">,</token>
+                    <token regexp="yes">h?ah?</token>
+                    <example>Ha ha, eu te disse!</example>
+                    <example>Ha hah, eu te disse!</example>
+                    <example>Ha, ha, eu te disse!</example>
+                </antipattern>
+                <pattern>
+                    <token case_sensitive="yes" regexp="yes">[hH]a</token>
+                </pattern>
+                <message>Possível erro de digitação. Será que você quis escrever <suggestion>há</suggestion>?</message>
+                <example correction="Há"><marker>Ha</marker> várias razões.</example>
+                <example correction="há">Ele <marker>ha</marker> de ser melhor.</example>
+            </rule>
+
+            <rule>
+                <pattern>
+                    <token regexp="yes">\d+|mil|[bm]ilh(ão|ões)</token>
+                    <marker>
+                        <token>há</token>
+                    </marker>
+                </pattern>
+                <message>A abreviatura da unidade de área &quot;hectare&quot; é <suggestion>ha</suggestion>.</message>
+                <example correction="ha">Comprou uma fazenda de 30 <marker>há</marker>.</example>
+            </rule>
+        </rulegroup>
+
 
         <rule id='ENTRAS_TE' name="[Confusão] 'entras te'/entraste">
             <!--      Created by Marco A.G.Pinto, Portuguese rule      -->
